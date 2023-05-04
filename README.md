@@ -7,5 +7,5 @@ CapybaApi
 
 3º Passo: Criar as Imagens e levantar os containers com as suas respectivas imagens -Para criar as imagens e subir para um container, use o comando abaixo no terminal: docker-compose up
 
-4º Passo: Acessar a aplicaçao e testar!! -Acesse o link abaixo para testar o sistema: http://localhost:8081/
+4º Passo: Acessar a aplicaçao e testar!! -Acesse o link abaixo para testar o sistema: http://localhost:8081/swagger-ui/
 
