@@ -11,11 +11,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.capyba.apirest.Usuario.Image.service.ImageService;
 import com.capyba.apirest.Usuario.model.Usuario;
 import com.capyba.apirest.Usuario.service.UsuarioService;
+
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 /* @CrossOrigin(origins = "*", allowedHeaders = "*") */
@@ -41,16 +45,25 @@ public class UsuarioController {
 		return ResponseEntity.ok(usuarioDtos);
 	}
 
-	@PostMapping(value = "/salvar", consumes = { "multipart/form-data" })
-	public Usuario salvarUsuario(@RequestPart("usuarios") Usuario usuario,
+	@PostMapping(value = "/salvar", consumes = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.MULTIPART_FORM_DATA_VALUE })
+	public Usuario salvarUsuario(@RequestParam @Valid String nome, String email, String senha,
 			@RequestPart("image") MultipartFile file) throws Exception {
-		/* var resultado = service.salvar(usuario); */
-
+	
+		
+		Usuario u = new Usuario();
+		u.setNome(nome);
+		u.setEmail(email);
+		u.setSenha(senha);
+		
+		
 		try {
 			/* service.uploadImage(file); */
-			return service.salvar(usuario, file);
+			return service.salvar(u, file);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.print(email);
+			System.out.print(file.getOriginalFilename());
+//			System.out.println(e.getMessage());
 			return null;
 		}
 

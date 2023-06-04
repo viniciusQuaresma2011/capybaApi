@@ -2,20 +2,17 @@ package com.capyba.apirest.auth.controller;
 
 import java.util.Objects;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capyba.apirest.Usuario.model.Usuario;
@@ -39,7 +36,10 @@ public class AuthenticationController {
 	private UsuarioService usuarioService;
 
 	@PostMapping("/login")
-	public ResponseEntity<TokenDto> retornaTokenLogin(@RequestBody Usuario usuarioDto) {
+	public ResponseEntity<TokenDto> retornaTokenLogin(@RequestParam String email, String senha) {
+		 Usuario usuarioDto = new Usuario();
+		 usuarioDto.setEmail(email);
+		 usuarioDto.setSenha(senha);
 		UsernamePasswordAuthenticationToken dadosLogin = usuarioDto.convertTo();
 		var usuario = usuarioService.encontrarUsuarioEmail(usuarioDto.getEmail());
 		System.out.println(usuario);

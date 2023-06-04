@@ -42,7 +42,7 @@ public class SwaggerConfiguration {
 		return new ApiInfoBuilder()
 				.title("Capyba API-REST")
 				.description("Esta API REST está sendo desenvolvida por Vinícius Quaresma" + "<br>"
-						+ "LinkedIn: https://www.linkedin.com/in/vinicius-quaresma-3b3268255/ ")
+						+ "LinkedIn: https://www.linkedin.com/in/vinícius-quaresma-3b3268255/ ")
 				.build();
 	}
 
