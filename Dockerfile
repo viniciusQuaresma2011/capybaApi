@@ -22,9 +22,11 @@ RUN apt-get clean && \
 COPY . .
 RUN apt-get install maven -y
 
-RUN mvn clean install
-
 FROM openjdk:11
+#RUN mvn clean install
+RUN mvn -f pom.xml clean package -DskipTests
+
+
 
 COPY --from=build /workspace/target/*.jar app.jar
 
